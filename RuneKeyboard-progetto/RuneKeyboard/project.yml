@@ -1,0 +1,46 @@
+name: RuneKeyboard
+options:
+  bundleIdPrefix: com.runekeyboard
+  deploymentTarget:
+    iOS: "15.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  RuneKeyboard:
+    type: application
+    platform: iOS
+    sources: [App]
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: Rune Keyboard
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.runekeyboard.app
+        TARGETED_DEVICE_FAMILY: "1"
+    dependencies:
+      - target: RuneKeyboardExtension
+  RuneKeyboardExtension:
+    type: app-extension
+    platform: iOS
+    sources: [Keyboard]
+    info:
+      path: Keyboard/Info.plist
+      properties:
+        CFBundleDisplayName: Rune Keyboard
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.keyboard-service
+          NSExtensionPrincipalClass: KeyboardViewController
+          NSExtensionAttributes:
+            IsASCIICapable: false
+            PrimaryLanguage: en-US
+            RequestsOpenAccess: false
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.runekeyboard.app.keyboard
+        TARGETED_DEVICE_FAMILY: "1"
